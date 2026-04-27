@@ -11,10 +11,9 @@ def add_new_member():
     # EXACT Column Names matching your SQL
     data = {
         "name": "Hafiya Siddiqha",
-        "father_name": "Siddiq", 
         "phone": "9030108465",
+        "joining_date": datetime.now().isoformat(),   
         "address": "Andhra Pradesh",
-        "age": 27,
         "total_savings": 0
     }
     
