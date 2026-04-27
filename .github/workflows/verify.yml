@@ -3,25 +3,24 @@ name: Database Check
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 jobs:
-  test-connection:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: os-actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      - name: Install Supabase
+      - name: Install dependencies
         run: pip install supabase
 
-      - name: Run Check
+      - name: Run Registration
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-       run: python add_member.py
+        run: python add_member.py
