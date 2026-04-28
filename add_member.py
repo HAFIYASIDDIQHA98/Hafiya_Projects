@@ -22,7 +22,7 @@ def add_new_member():
     try:
         response = supabase.table("members").insert(data).execute()
         if response.data:
-            print("MashaAllah! Data successfully saved in Supabase.")
+            print("MashaAllah! Data successfully saved in Supabase yes.")
         else:
             print("Warning: Response returned but data might be empty.")
     except Exception as e:
