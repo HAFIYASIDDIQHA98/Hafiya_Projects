@@ -1,7 +1,7 @@
 import os
 from supabase import create_client, Client
 
-# Sahi URL aur Key GitHub Secrets se aayenge
+# Environment variables
 url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
@@ -21,12 +21,18 @@ def add_new_member():
     }
     
     try:
-        # Table name 'members' check kijiye
+        # Inserting into 'members' table
+        print("Data bhej rahe hain...")
         response = supabase.table("members").insert(data).execute()
+        
+        # Check if record is returned
         if response.data:
-            print("MashaAllah! Data successfully saved in Supabase.")
+            print(f"MashaAllah! Record added successfully: {response.data}")
+        else:
+            print("Error: Database ne data toh liya par response nahi diya.")
+            
     except Exception as e:
-        print(f"Error occurred: {e}")
+        print(f"Bahut badi galti: {e}")
 
 if __name__ == "__main__":
     add_new_member()
