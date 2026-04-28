@@ -1,33 +1,36 @@
 import os
 from supabase import create_client, Client
 
-# Supabase Credentials
+# Supabase Credentials from GitHub Secrets
 url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 def add_new_member():
-    # EXACT Table Name: 'members'
-    # EXACT Column Names matching your SQL
+    # Exactly matching your 9 fields
     data = {
         "name": "Hafiya Siddiqha",
-        "phone": "9030108465",
-        "joining_date": datetime.now().isoformat(),   
-        "address": "Andhra Pradesh",
-        "total_savings": 0
+        "aadhar_number": "123456789012", # Sample
+        "father_name": "Siddiq",
+        "mother_name": "Mrs. Siddiqha",
+        "phone_number": "9030108465",
+        "age": 27,
+        "dob": "1997-01-01",           # Format: YYYY-MM-DD
+        "joining_date": "2025-10-25",  # Format: YYYY-MM-DD
+        "address": "Andhra Pradesh"
     }
     
     try:
-        # Inserting into 'members' table
+        # Table name plural 'members'
         response = supabase.table("members").insert(data).execute()
         
         if response.data:
-            print(f"MashaAllah! {data['name']} ka record save ho gaya hai.")
+            print("MashaAllah! Hafiya, sabhi 9 fields ke saath data save ho gaya hai.")
         else:
-            print("Warning: Code chala par response empty hai.")
+            print("Warning: Response empty hai. Check table policies.")
             
     except Exception as e:
-        print(f"Galti hui: {e}")
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
     add_new_member()
