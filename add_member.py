@@ -7,28 +7,24 @@ key = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 def add_new_member():
-    # Exactly matching your 9 fields
+    # Aapke bataye huye exact 9 fields
     data = {
         "name": "Hafiya Siddiqha",
-        "aadhar_number": "123456789012", # Sample
+        "aadhar_number": "123456789012",
         "father_name": "Siddiq",
         "mother_name": "Mrs. Siddiqha",
         "phone_number": "9030108465",
         "age": 27,
-        "dob": "1997-01-01",           # Format: YYYY-MM-DD
-        "joining_date": "2025-10-25",  # Format: YYYY-MM-DD
+        "dob": "1997-01-01",
+        "joining_date": "2026-04-28",
         "address": "Andhra Pradesh"
     }
     
     try:
         # Table name plural 'members'
         response = supabase.table("members").insert(data).execute()
-        
         if response.data:
-            print("MashaAllah! Hafiya, sabhi 9 fields ke saath data save ho gaya hai.")
-        else:
-            print("Warning: Response empty hai. Check table policies.")
-            
+            print("MashaAllah! Data successfully save ho gaya hai.")
     except Exception as e:
         print(f"Error: {e}")
 
