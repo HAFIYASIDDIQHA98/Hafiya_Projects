@@ -1,13 +1,12 @@
 import os
 from supabase import create_client, Client
 
-# Supabase Credentials from GitHub Secrets
 url = os.environ.get("SUPABASE_URL")
 key = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 def add_new_member():
-    # Aapke bataye huye exact 9 fields
+    # Exactly matching your 9 fields and SQL columns
     data = {
         "name": "Hafiya Siddiqha",
         "aadhar_number": "123456789012",
@@ -21,12 +20,13 @@ def add_new_member():
     }
     
     try:
-        # Table name plural 'members'
         response = supabase.table("members").insert(data).execute()
         if response.data:
-            print("MashaAllah! Data successfully save ho gaya hai.")
+            print("MashaAllah! Data successfully saved in Supabase.")
+        else:
+            print("Warning: Response returned but data might be empty.")
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error details: {e}")
 
 if __name__ == "__main__":
     add_new_member()
